@@ -1,5 +1,5 @@
 
-node{
+node ('nodejsnode'){
     def mavenHome = tool name: 'maven'
     
     echo "the Job name is: ${env.JOB_NAME}"
