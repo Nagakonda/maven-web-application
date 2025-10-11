@@ -33,9 +33,9 @@ pipeline{
         {
             steps()
                 {
-                    withCredentials([string(credentialsId: 'Docker_Hub_pwd', variable: 'Docker_Hub_pwd')]) 
+                    withCredentials([string(credentialsId: 'Docker_Hub_Pwd', variable: 'Docker_Hub_Pwd')]) 
                     {
-                    sh 'docker login -u naga123docker -p ${Docker_Hub_pwd}'
+                    sh 'docker login -u naga123docker -p ${Docker_Hub_Pwd}'
                     }
                     sh 'docker push naga123docker/dockercicd:${buildNumber}'
                 }
