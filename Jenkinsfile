@@ -3,6 +3,10 @@ pipeline{
     tools{
         maven 'maven'
     }
+    environment
+    {
+        buildnumber = "${BUILD_NUMBER}"
+    }
     stages{
         stage('Git Checkout')
         {
@@ -18,5 +22,13 @@ pipeline{
                 sh 'mvn clean package'
             }
         }
+        stage('Build the docker image')
+        {
+            steps()
+            {
+            sh 'docker build -t naga123docker/dockercicd:${buildnumber} .'
+            }
+        }
     }
+    
 }
