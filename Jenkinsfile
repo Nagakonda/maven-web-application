@@ -40,6 +40,24 @@ pipeline{
                     sh 'docker push naga123docker/dockercicd:${buildnumber}'
                 }
         }
+        stage('Remove Docker Image Locally')
+        {
+            steps()
+            {
+                sh 'docker rmi naga123docker/dockercicd:${buildnumber}'
+            }
+        }
+        stage('Deploy Application to Docker Deployment Server')
+        {
+            steps()
+            {
+                sshagent(['DeployamentServer_SSH']) 
+                {
+                sh "ssh -o StrictHostKeyChecking=no ubuntu@13.215.178.228 docker rm -f mavenwebapplication || true" 
+	            sh "ssh -o StrictHostKeyChecking=no ubuntu@13.215.178.228 docker run -d --name mavenwebapplication -p 8080:8080 naga123docker/dockercicd:${buildnumber}"   
+                }
+            }
+        }
     }
     
 }
