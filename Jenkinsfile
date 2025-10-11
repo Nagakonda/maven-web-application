@@ -29,6 +29,18 @@ pipeline{
             sh 'docker build -t naga123docker/dockercicd:${buildnumber} .'
             }
         }
+        stage('Push Docker image to Docker Registry')
+        {
+            steps()
+                {
+                    withCredentials([string(credentialsId: 'Docker_Hub_pwd', variable: 'Docker_Hub_pwd')]) 
+                    {
+                    sh 'docker push  naga123docker/dockercicd:${buildnumber}'
+                    }
+                }
+            
+            
+        }
     }
     
 }
