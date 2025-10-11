@@ -37,7 +37,7 @@ pipeline{
                     {
                     sh 'docker login -u naga123docker -p ${Docker_Hub_Pwd}'
                     }
-                    sh 'docker push naga123docker/dockercicd:${buildNumber}'
+                    sh 'docker push naga123docker/dockercicd:${buildnumber}'
                 }
         }
     }
