@@ -61,7 +61,7 @@ pipeline
         {
             steps()
             {
-                sh 'kubectl delete deployment webpage-deployment -n production || true'
+                sh 'kubectl delete -f  deployment webpage-deployment -n production || true'
                 sh 'kubectl apply -f MavenWebApplication.yaml'
             }
         }
