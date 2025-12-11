@@ -56,7 +56,8 @@ pipeline
                 sh "sed -i 's/Build_Tag/${buildNumber}/g' MavenWebApplication.yaml"
             }
         }
-        stage('Deploy Application in Aws EKS Cluster')
+
+        stage('Deploy Application in AWS EKS Cluster')
         {
             steps()
             {
