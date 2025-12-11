@@ -42,5 +42,27 @@ pipeline
                 sh 'docker push 293578647166.dkr.ecr.ap-southeast-1.amazonaws.com/maven-web-application:${buildNumber}'
             }
         }
+        stage('Remove docker image from Jenkins Server')
+        {
+            steps()
+            {
+                sh 'docker rmi 293578647166.dkr.ecr.ap-southeast-1.amazonaws.com/maven-web-application:${buildNumber}'
+            }
+        }
+        stage('Update Image Tag in K8S Manifest File')
+        {
+            steps()
+            {
+                sh "sed -i 's/Build_Tag/${buildNumber}/g' MavenWebApplication.yaml"
+            }
+        }
+        stage('Deploy Application in Aws EKS Cluster')
+        {
+            steps()
+            {
+                sh 'kubectl delete deployment webpage-deployment -n production || true'
+                sh 'kubectl apply -f MavenWebApplication.yaml'
+            }
+        }
     }
 }
