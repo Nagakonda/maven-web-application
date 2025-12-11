@@ -6,7 +6,7 @@ pipeline
     {
         stage('Checkout Code from GitHub')
         {
-            step()
+            steps()
             {
                 git branch: 'K8SNEW', url: 'https://github.com/Nagakonda/maven-web-application.git'
             }
