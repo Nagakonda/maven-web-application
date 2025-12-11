@@ -30,7 +30,9 @@ pipeline
         stage('Build Docker Image')
         {
             steps()
+            {
             sh 'docker build -t 293578647166.dkr.ecr.ap-southeast-1.amazonaws.com/maven-web-application:${buildNumber} .'
+            }
         }
     }
 }
